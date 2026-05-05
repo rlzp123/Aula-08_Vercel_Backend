@@ -18,7 +18,7 @@ const supabase = createClient(
 
 // ================= LOGGER ================= //
 app.use((req, res, next) => {
-    console.log([${new Date().toLocaleTimeString()}] ${req.method} ${req.url});
+    console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
     next();
 });
 
@@ -149,7 +149,13 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(🚀 Servidor rodando na porta ${PORT});
+    console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
 
 module.exports = app;
+
+// Procure onde estão os outros app.use
+const pedidosRoute = require('./routes/pedidos');
+
+// Adicione esta linha perto das outras rotas (como produtos e categorias)
+app.use('/pedidos', pedidosRoute);
